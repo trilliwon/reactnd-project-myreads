@@ -2,8 +2,15 @@ import React, { Component } from 'react'
 import BookShelf from './BookShelf'
 
 class ListBooks extends Component {
+
+    shelves = [
+        { 'id': 'currentlyReading', 'title': 'Currently Reading' },
+        { 'id': 'wantToRead', 'title': 'Want to Read' },
+        { 'id': 'read', 'title': 'Read' },
+    ];
+
     render() {
-        const { shelves, books } = this.props;
+        const { books, onShowSearchPage, onChangeShelf } = this.props;
         return (
             <div className="list-books">
                 <div className="list-books-title">
@@ -11,13 +18,13 @@ class ListBooks extends Component {
                 </div>
                 <div className="list-books-content">
                     <div>
-                        {shelves.map((shelf) => (
-                            <BookShelf key={shelf.id} books={books} shelf={shelf}></BookShelf>
+                        {this.shelves.map((shelf) => (
+                            <BookShelf key={shelf.id} books={books} shelf={shelf} onChangeShelf={onChangeShelf}></BookShelf>
                         ))}
                     </div>
                 </div>
                 <div className="open-search">
-                    <button onClick={() => this.setState({ showSearchPage: true })}>Add a book</button>
+                    <button onClick={onShowSearchPage}>Add a book</button>
                 </div>
             </div>
 
