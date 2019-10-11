@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import * as BooksAPI from './BooksAPI'
+import * as BooksAPI from '../api/BooksAPI'
 import Books from './Books';
 
 class SearchBooks extends Component {
@@ -37,6 +37,14 @@ class SearchBooks extends Component {
         })
     }
 
+    handleSubmit = (e) => {
+        console.log('handlesubmit')
+        e.preventDefault()
+        if (this.props.onCloseSearchPage) {
+            this.props.onCloseSearchPage()
+        }
+    }
+
     render() {
         const { books } = this.state
 
@@ -44,7 +52,7 @@ class SearchBooks extends Component {
             <div>
                 <div className="search-books">
                     <div className="search-books-bar">
-                        <button className="close-search">Close</button>
+                        <button className="close-search" onClick={this.handleSubmit}>Close</button>
                         <div className="search-books-input-wrapper">
                             <input
                                 type="text"

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import BookShelf from './BookShelf'
+import { Link } from 'react-router-dom'
 
 class ListBooks extends Component {
 
@@ -9,8 +10,14 @@ class ListBooks extends Component {
         { 'id': 'read', 'title': 'Read' },
     ];
 
+    onShowSearchPage = (e) => {
+        e.preventDefault()
+        if (this.props.onShowSearchPage) {
+            this.props.onShowSearchPage()
+        }
+    }
+
     render() {
-        const { books, onShowSearchPage, onChangeShelf } = this.props;
         return (
             <div className="list-books">
                 <div className="list-books-title">
@@ -19,12 +26,19 @@ class ListBooks extends Component {
                 <div className="list-books-content">
                     <div>
                         {this.shelves.map((shelf) => (
-                            <BookShelf key={shelf.id} books={books} shelf={shelf} onChangeShelf={onChangeShelf}></BookShelf>
+                            <BookShelf
+                                key={shelf.id}
+                                books={this.props.books}
+                                shelf={shelf}
+                                onChangeShelf={this.props.onChangeShelf}>
+                            </BookShelf>
                         ))}
                     </div>
                 </div>
                 <div className="open-search">
-                    <button onClick={onShowSearchPage}>Add a book</button>
+                    <Link to="/search" className='add-contact'>
+                        Add Contact
+                    </Link>
                 </div>
             </div>
 
