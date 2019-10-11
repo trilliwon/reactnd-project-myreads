@@ -26,8 +26,9 @@ class SearchBooks extends Component {
                     if (books === undefined || books.error !== undefined) {
                         return
                     }
+
                     this.setState(() => ({
-                        books: books,
+                        books: this.mapMyBooks(books),
                     }))
                 }).catch((error) => {
                     this.setState(() => ({
@@ -37,8 +38,14 @@ class SearchBooks extends Component {
         })
     }
 
+    mapMyBooks = (searchedBooks) => {
+        return searchedBooks.map((book) => {
+            let mybook = this.props.mybooks.find((element) => book.id === element.id)
+            return mybook === undefined ? book : mybook
+        })
+    }
+
     handleSubmit = (e) => {
-        console.log('handlesubmit')
         e.preventDefault()
         if (this.props.onCloseSearchPage) {
             this.props.onCloseSearchPage()
@@ -46,7 +53,6 @@ class SearchBooks extends Component {
     }
 
     render() {
-        const { books } = this.state
 
         return (
             <div>
@@ -65,7 +71,7 @@ class SearchBooks extends Component {
                         <ol className="books-grid"></ol>
                     </div>
                 </div>
-                <Books books={books} ></Books>
+                <Books books={this.state.books} ></Books>
             </div>
         );
     }

@@ -23,26 +23,20 @@ class BooksApp extends React.Component {
       })
   }
 
-  onChangeShelf = (book, shelf) => {
-    const changedBook = this.state.books.find(({ id }) => {
-      return book.id === id;
-    })
-    console.log(changedBook, shelf);
-  }
-
   render() {
     return (
       <div className="app">
-        <Route exact path="/" render={(history) => (
+        <Route exact path="/" render={() => (
           <ListBooks
             books={this.state.books}
-            onChangeShelf={this.onChangeShelf}>
+            onChangeShelf={this.initializeState}>
           </ListBooks>
         )} />
         <Route path="/search" render={({ history }) => (
-          <SearchBooks onCloseSearchPage={() => (
+          <SearchBooks mybooks={this.state.books} onCloseSearchPage={() => {
+            this.initializeState()
             history.push('/')
-          )}></SearchBooks>
+          }}></SearchBooks>
         )} />
       </div>
     )
