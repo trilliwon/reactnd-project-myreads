@@ -30,7 +30,7 @@ class Book extends Component {
 
     render() {
         const { book } = this.state
-        const shelf = book.shelf === undefined ? 'none' : book.shelf
+        const shelf = book.shelf || 'none';
 
         const smallThumbnail = (book.imageLinks !== undefined && book.imageLinks.smallThumbnail !== undefined) ? book.imageLinks.smallThumbnail : ''
 
