@@ -20,7 +20,6 @@ class SearchBooks extends Component {
     }
 
     searchBooks = (query) => {
-        console.log('query ---> ', query)
         BooksAPI.search(query)
             .then((books) => {
 
