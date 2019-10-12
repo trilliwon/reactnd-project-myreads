@@ -33,3 +33,5 @@ sketch
 ### Firebase Patch ###
 .runtimeconfig.json
 .firebase/
+
+build/
