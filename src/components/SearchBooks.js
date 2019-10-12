@@ -9,33 +9,33 @@ class SearchBooks extends Component {
         query: '',
     }
 
+    debounce = (func, delay) => {
+        let inDebounce
+        return function () {
+            const context = this
+            const args = arguments
+            clearTimeout(inDebounce)
+            inDebounce = setTimeout(() => func.apply(context, args), delay)
+        }
+    }
+
     searchBooks = (query) => {
-        this.setState({
-            query: query
-        }, () => {
-            if (query === '') {
+        console.log('query ---> ', query)
+        BooksAPI.search(query)
+            .then((books) => {
+
+                if (books === undefined || books.error !== undefined) {
+                    return
+                }
+
+                this.setState(() => ({
+                    books: this.mapMyBooks(books),
+                }))
+            }).catch((error) => {
                 this.setState(() => ({
                     books: [],
                 }))
-                return
-            }
-
-            BooksAPI.search(query)
-                .then((books) => {
-
-                    if (books === undefined || books.error !== undefined) {
-                        return
-                    }
-
-                    this.setState(() => ({
-                        books: this.mapMyBooks(books),
-                    }))
-                }).catch((error) => {
-                    this.setState(() => ({
-                        books: [],
-                    }))
-                })
-        })
+            })
     }
 
     mapMyBooks = (searchedBooks) => {
@@ -52,6 +52,25 @@ class SearchBooks extends Component {
         }
     }
 
+    handleQueryInput = (event) => {
+        event.preventDefault()
+        const query = event.target.value
+
+        this.setState({
+            query: query
+        }, () => {
+            if (query === '') {
+                this.setState(() => ({
+                    books: [],
+                }))
+                return
+            }
+            this.debouncedSearch(query.trim())
+        })
+    }
+
+    debouncedSearch = this.debounce(this.searchBooks, 500)
+
     render() {
 
         return (
@@ -64,7 +83,7 @@ class SearchBooks extends Component {
                                 type="text"
                                 placeholder="Search by title or author"
                                 value={this.state.query}
-                                onChange={(event) => this.searchBooks(event.target.value)} />
+                                onChange={this.handleQueryInput} />
                         </div>
                     </div>
                     <div className="search-books-results">
