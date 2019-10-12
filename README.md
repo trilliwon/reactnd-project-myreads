@@ -1,8 +1,12 @@
 # MyReads Project
 
-This is the project for Udacity's React Nanodegree. As a user, you can select books to categorize and search books to addd your bookshelf. There are three category such as **Currently Reading**, **Want to Read** and **Read**. This project built by using [ReactJS](https://reactjs.org), [React Router](https://reacttraining.com/react-router) and Udacity Books API.
+This is the project for Udacity's React Nanodegree. As a user, you can select books to categorize and search books to add to your bookshelf. There are three category such as **Currently Reading**, **Want to Read** and **Read**. This project built by using [ReactJS](https://reactjs.org), [React Router](https://reacttraining.com/react-router) and Udacity Books API.
 
 ## Getting Started
+
+* clone project `git clone https://github.com/trilliwon/reactnd-project-myreads.git`
+* install all project dependencies with `npm install`
+* start the development server with `npm start`
 
 ## Demo
 
@@ -10,18 +14,9 @@ This is the project for Udacity's React Nanodegree. As a user, you can select bo
 
 ### Built With
 
-* React
 * [ReactJS](https://reactjs.org)
 * [React Router](https://reacttraining.com/react-router)
 * Udacity Books API
-
-## Installing
-
-To get started developing right away:
-
-* clone project `git clone https://github.com/trilliwon/reactnd-project-myreads.git`
-* install all project dependencies with `npm install`
-* start the development server with `npm start`
 
 ## Functionalities
 
@@ -29,8 +24,8 @@ To get started developing right away:
     * Currently Reading
     * Want to Read
     * Read
-* Clicking the plus(+) button at bottom right, user can search books and select to add your bookshelf
-    * Debounced search that delays user input for 500ms
+* Clicking the plus(+) button at bottom right, user can search books and select to add to your bookshelf
+    * Available **debounced search** that delays user input for 500ms
 
 ## File Structure
 ```bash
