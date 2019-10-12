@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 import * as BooksAPI from '../api/BooksAPI'
 
 class Book extends Component {
+
+    static propTypes = {
+        book: PropTypes.object.isRequired,
+        onChangeShelf: PropTypes.func.isRequired
+    }
 
     state = {
         book: this.props.book,
@@ -10,7 +16,6 @@ class Book extends Component {
     onChangeShelf = (shelf) => {
         BooksAPI.update(this.state.book, shelf)
             .then((res) => {
-                console.log(res)
 
                 if (this.props.onChangeShelf) {
                     this.props.onChangeShelf();
