@@ -16,16 +16,15 @@ class Book extends Component {
     onChangeShelf = (shelf) => {
         BooksAPI.update(this.state.book, shelf)
             .then((res) => {
-
-                if (this.props.onChangeShelf) {
-                    this.props.onChangeShelf();
-                }
-
                 return BooksAPI.get(this.state.book.id)
             }).then((book) => {
                 this.setState(() => ({
                     book: book
                 }))
+
+                if (this.props.onChangeShelf) {
+                    this.props.onChangeShelf();
+                }
             })
     }
 
