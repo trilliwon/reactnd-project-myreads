@@ -24,6 +24,10 @@ class SearchBooks extends Component {
             .then((books) => {
 
                 if (books === undefined || books.error !== undefined) {
+                    this.setState(() => ({
+                        books: [],
+                    }))
+
                     return
                 }
 

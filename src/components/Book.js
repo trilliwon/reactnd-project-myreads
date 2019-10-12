@@ -6,7 +6,7 @@ class Book extends Component {
 
     static propTypes = {
         book: PropTypes.object.isRequired,
-        onChangeShelf: PropTypes.func.isRequired
+        onChangeShelf: PropTypes.func
     }
 
     state = {
